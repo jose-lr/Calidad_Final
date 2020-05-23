@@ -1,0 +1,4 @@
+Calidad: be2a8f1134839f8ecfb7153887fb1ff697d00afa
+
+
+sonar-scanner.bat -D "sonar.projectKey=Proyecto_Calidad" -D "sonar.sources=." -D "sonar.host.url=http://localhost:9000" -D "sonar.login=be2a8f1134839f8ecfb7153887fb1ff697d00afa"
