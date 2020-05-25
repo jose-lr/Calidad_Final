@@ -145,9 +145,9 @@ llxHeader('', $langs->trans("MembersSetup"), $help_url);
 
 $linkback='<a href="'.DOL_URL_ROOT.'/admin/modules.php?restore_lastsearch_values=1">'.$langs->trans("BackToModuleList").'</a>';
 print load_fiche_titre($langs->trans("MembersSetup"), $linkback, 'title_setup');
-
 const CELDA_CERRADA= '</td>';
 const CREACION_FILA = '</tr>\n'
+	
 $head = member_admin_prepare_head();
 
 dol_fiche_head($head, 'general', $langs->trans("Members"), -1, 'user');
@@ -162,24 +162,25 @@ print '<tr class="liste_titre">';
 print '<td>'.$langs->trans("Description").'CELDA_CERRADA';
 print '<td>'.$langs->trans("Value").'CELDA_CERRADA';
 print "CREACION_FILA";
-
-
-print '<tr class="oddeven"><td>'.$langs->trans("AdherentLoginRequired").'</td><td>';
+const TR_CLASS_TD='<tr class="oddeven"><td>';
+const CELDA_CERRADA_CELDA_ABIERTA='</td><td>';
+const CERRAR_TD_TR='</td></tr>\n';
+print 'TR_CLASS_TD'.$langs->trans("AdherentLoginRequired").'CELDA_CERRADA_CELDA_ABIERTA';
 print $form->selectyesno('ADHERENT_LOGIN_NOT_REQUIRED', (! empty($conf->global->ADHERENT_LOGIN_NOT_REQUIRED)?0:1), 1);
-print "</td></tr>\n";
+print "CERRAR_TD_TR";
 
 
-print '<tr class="oddeven"><td>'.$langs->trans("AdherentMailRequired").'</td><td>';
+print 'TR_CLASS_TD'.$langs->trans("AdherentMailRequired").'CELDA_CERRADA_CELDA_ABIERTA';
 print $form->selectyesno('ADHERENT_MAIL_REQUIRED', (! empty($conf->global->ADHERENT_MAIL_REQUIRED)?$conf->global->ADHERENT_MAIL_REQUIRED:0), 1);
-print "</td></tr>\n";
+print "CERRAR_TD_TR";
 
 
-print '<tr class="oddeven"><td>'.$langs->trans("MemberSendInformationByMailByDefault").'</td><td>';
+print 'TR_CLASS_TD'.$langs->trans("MemberSendInformationByMailByDefault").'CELDA_CERRADA_CELDA_ABIERTA';
 print $form->selectyesno('ADHERENT_DEFAULT_SENDINFOBYMAIL', (! empty($conf->global->ADHERENT_DEFAULT_SENDINFOBYMAIL)?$conf->global->ADHERENT_DEFAULT_SENDINFOBYMAIL:0), 1);
-print "</td></tr>\n";
+print "CERRAR_TD_TR";
 
 
-print '<tr class="oddeven"><td>'.$langs->trans("MoreActionsOnSubscription").'CELDA_CERRADA';
+print 'TR_CLASS_TD'.$langs->trans("MoreActionsOnSubscription").'CELDA_CERRADA';
 $arraychoices=array('0'=>$langs->trans("None"));
 if (! empty($conf->banque->enabled)){ $arraychoices['bankdirect']=$langs->trans("MoreActionBankDirect"); }
 if (! empty($conf->banque->enabled) && ! empty($conf->societe->enabled) && ! empty($conf->facture->enabled)) { $arraychoices['invoiceonly']=$langs->trans("MoreActionInvoiceOnly"); }
@@ -196,7 +197,7 @@ print "CREACION_FILA";
 
 if ($conf->facture->enabled)
 {
-	print '<tr class="oddeven"><td>'.$langs->trans("VATToUseForSubscriptions").'CELDA_CERRADA';
+	print 'TR_CLASS_TD'.$langs->trans("VATToUseForSubscriptions").'CELDA_CERRADA';
 	if (! empty($conf->banque->enabled))
 	{
 		print '<td>';
@@ -213,7 +214,7 @@ if ($conf->facture->enabled)
 
 	if (! empty($conf->product->enabled) || ! empty($conf->service->enabled))
 	{
-		print '<tr class="oddeven"><td>'.$langs->trans("ADHERENT_PRODUCT_ID_FOR_SUBSCRIPTIONS").'CELDA_CERRADA';
+		print 'TR_CLASS_TD'.$langs->trans("ADHERENT_PRODUCT_ID_FOR_SUBSCRIPTIONS").'CELDA_CERRADA';
 		print '<td>';
 		$form->select_produits($conf->global->ADHERENT_PRODUCT_ID_FOR_SUBSCRIPTIONS, 'ADHERENT_PRODUCT_ID_FOR_SUBSCRIPTIONS', '', 0);
 		print 'CELDA_CERRADA';
