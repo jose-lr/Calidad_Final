@@ -905,8 +905,6 @@ class BOM extends CommonObject
 
 	    if (is_numeric($result))
 	    {
-	        $this->error = $this->error;
-	        $this->errors = $this->errors;
 	        return $result;
 	    }
 	    else
