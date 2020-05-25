@@ -36,25 +36,25 @@ require_once DOL_DOCUMENT_ROOT.'/core/lib/member.lib.php';
 // Load translation files required by the page
 $langs->loadLangs(array("admin","members"));
 
-if (! $user->admin) accessforbidden();
+if (! $user->admin) { accessforbidden(); }
 
-
-$oldtypetonewone=array('texte'=>'text','chaine'=>'string');	// old type to new ones
-
-$action = GETPOST('action', 'alpha');
+const CADENA='string';
+$oldtypetonewone=array('texte'=>'text','chaine'=>'CADENA');	// old type to new ones
+const ALP='alpha';
+$action = GETPOST('action', 'ALP');
 
 $error = 0;
-
+const EMAIL='emailtemplate:member';
 // Editing global variables not related to a specific theme
 $constantes=array(
     'MEMBER_REMINDER_EMAIL'=>array('type'=>'yesno', 'label'=>$langs->trans('MEMBER_REMINDER_EMAIL', $langs->transnoentities("Module2300Name"))),
-    'ADHERENT_EMAIL_TEMPLATE_REMIND_EXPIRATION' =>'emailtemplate:member',
-    'ADHERENT_EMAIL_TEMPLATE_AUTOREGISTER'		=>'emailtemplate:member',		/* old was ADHERENT_AUTOREGISTER_MAIL */
-    'ADHERENT_EMAIL_TEMPLATE_MEMBER_VALIDATION'	=>'emailtemplate:member',		/* old was ADHERENT_MAIL_VALID */
-    'ADHERENT_EMAIL_TEMPLATE_SUBSCRIPTION'		=>'emailtemplate:member',		/* old was ADHERENT_MAIL_COTIS */
-    'ADHERENT_EMAIL_TEMPLATE_CANCELATION'		=>'emailtemplate:member',		/* old was ADHERENT_MAIL_RESIL */
-    'ADHERENT_MAIL_FROM'=>'string',
-    'ADHERENT_AUTOREGISTER_NOTIF_MAIL_SUBJECT'=>'string',
+    'ADHERENT_EMAIL_TEMPLATE_REMIND_EXPIRATION' =>'EMAIL',
+    'ADHERENT_EMAIL_TEMPLATE_AUTOREGISTER'		=>'EMAIL',		/* old was ADHERENT_AUTOREGISTER_MAIL */
+    'ADHERENT_EMAIL_TEMPLATE_MEMBER_VALIDATION'	=>'EMAIL',		/* old was ADHERENT_MAIL_VALID */
+    'ADHERENT_EMAIL_TEMPLATE_SUBSCRIPTION'		=>'EMAIL',		/* old was ADHERENT_MAIL_COTIS */
+    'ADHERENT_EMAIL_TEMPLATE_CANCELATION'		=>'EMAIL',		/* old was ADHERENT_MAIL_RESIL */
+    'ADHERENT_MAIL_FROM'=>'CADENA',
+    'ADHERENT_AUTOREGISTER_NOTIF_MAIL_SUBJECT'=>'CADENA',
     'ADHERENT_AUTOREGISTER_NOTIF_MAIL'=>'html',
 );
 
@@ -69,7 +69,7 @@ if ($action == 'updateall')
 {
     $db->begin();
     $res1=$res2=$res3=$res4=$res5=$res6=0;
-    $res1=dolibarr_set_const($db, 'XXXX', GETPOST('ADHERENT_LOGIN_NOT_REQUIRED', 'alpha'), 'chaine', 0, '', $conf->entity);
+    $res1=dolibarr_set_const($db, 'XXXX', GETPOST('ADHERENT_LOGIN_NOT_REQUIRED', 'ALP'), 'chaine', 0, '', $conf->entity);
     if ($res1 < 0 || $res2 < 0 || $res3 < 0 || $res4 < 0 || $res5 < 0 || $res6 < 0)
     {
         setEventMessages('ErrorFailedToSaveDate', null, 'errors');
@@ -86,9 +86,9 @@ if ($action == 'updateall')
 if ($action == 'update' || $action == 'add')
 {
 	$constlineid = GETPOST('rowid', 'int');
-	$constname=GETPOST('constname', 'alpha');
+	$constname=GETPOST('constname', 'ALP');
 
-	$constvalue=(GETPOSTISSET('constvalue_'.$constname) ? GETPOST('constvalue_'.$constname, 'alpha') : GETPOST('constvalue'));
+	$constvalue=(GETPOSTISSET('constvalue_'.$constname) ? GETPOST('constvalue_'.$constname, 'ALP') : GETPOST('constvalue'));
 	$consttype=(GETPOSTISSET('consttype_'.$constname) ? GETPOST('consttype_'.$constname, 'alphanohtml') : GETPOST('consttype'));
 	$constnote=(GETPOSTISSET('constnote_'.$constname) ? GETPOST('constnote_'.$constname, 'none') : GETPOST('constnote'));
 
@@ -96,7 +96,7 @@ if ($action == 'update' || $action == 'add')
 
 	$res=dolibarr_set_const($db, $constname, $constvalue, $typetouse, 0, $constnote, $conf->entity);
 
-	if (! $res > 0) $error++;
+	if (! $res > 0) { $error++; }
 
 	if (! $error)
 	{
@@ -111,7 +111,7 @@ if ($action == 'update' || $action == 'add')
 // Action to enable a submodule of the adherent module
 if ($action == 'set')
 {
-    $result=dolibarr_set_const($db, GETPOST('name', 'alpha'), GETPOST('value'), '', 0, '', $conf->entity);
+    $result=dolibarr_set_const($db, GETPOST('name', 'ALP'), GETPOST('value'), '', 0, '', $conf->entity);
     if ($result < 0)
     {
         print $db->error();
@@ -121,7 +121,7 @@ if ($action == 'set')
 // Action to disable a submodule of the adherent module
 if ($action == 'unset')
 {
-    $result=dolibarr_del_const($db, GETPOST('name', 'alpha'), $conf->entity);
+    $result=dolibarr_del_const($db, GETPOST('name', 'ALP'), $conf->entity);
     if ($result < 0)
     {
         print $db->error();
@@ -150,7 +150,6 @@ $head = member_admin_prepare_head();
 dol_fiche_head($head, 'emails', $langs->trans("Members"), -1, 'user');
 
 // TODO Use global form
-//print '<form action="'.$_SERVER["PHP_SELF"].'" method="POST">';
 //print '<input type="hidden" name="token" value="'.newToken().'">';
 //print '<input type="hidden" name="action" value="updateall">';
 
@@ -161,8 +160,7 @@ $helptext.='__COMPANY__, __ADDRESS__, __ZIP__, __TOWN__, __COUNTRY__, __EMAIL__,
 
 form_constantes($constantes, 0, $helptext);
 
-//print '<div class="center"><input type="submit" class="button" value="'.$langs->trans("Update").'" name="update"></div>';
-//print '</form>';
+
 
 dol_fiche_end();
 
