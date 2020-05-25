@@ -596,10 +596,10 @@ if (empty($reshook))
 				if ($object->error) {
 					setEventMessages($object->error, $object->errors, 'errors');
 				} else {
-					setEventMessages($object->error, $object->errors, 'errors');
+					$action = 'create';
 				}
 
-				$action = 'create';
+				
 			}
 		}
 		else {
@@ -695,8 +695,6 @@ if (empty($reshook))
 			$error++;
 			if ($object->error) {
 				setEventMessages($object->error, $object->errors, 'errors');
-			} else {
-				setEventMessages($object->error, $object->errors, 'errors');
 			}
 		}
 
@@ -777,9 +775,7 @@ if (empty($reshook))
 
 				if ($object->error) {
 					setEventMessages($object->error, $object->errors, 'errors');
-				} else {
-					setEventMessages($object->error, $object->errors, 'errors');
-				}
+				} 
 				$action = '';
 			}
 		}
