@@ -35,7 +35,7 @@ $langs->loadLangs(array("admin", "members"));
 
 $action = GETPOST('action', 'alpha');
 
-if (!$user->admin) accessforbidden();
+if (!$user->admin) { accessforbidden(); }
 
 
 /*
@@ -44,8 +44,8 @@ if (!$user->admin) accessforbidden();
 
 if ($action == 'setMEMBER_ENABLE_PUBLIC')
 {
-	if (GETPOST('value')) dolibarr_set_const($db, 'MEMBER_ENABLE_PUBLIC', 1, 'chaine', 0, '', $conf->entity);
-	else dolibarr_set_const($db, 'MEMBER_ENABLE_PUBLIC', 0, 'chaine', 0, '', $conf->entity);
+	if (GETPOST('value')) { dolibarr_set_const($db, 'MEMBER_ENABLE_PUBLIC', 1, 'chaine', 0, '', $conf->entity); 
+       }else { dolibarr_set_const($db, 'MEMBER_ENABLE_PUBLIC', 0, 'chaine', 0, '', $conf->entity); }
 }
 
 if ($action == 'update')
