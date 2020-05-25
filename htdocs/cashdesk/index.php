@@ -95,6 +95,9 @@ else
 <table>
 
 	<tr>
+		<th scope="col">Name</th>
+    		<th scope="col">Age</th>
+		<caption>New</caption>
 		<td class="label1"><?php echo $langs->trans("Login"); ?></td>
 		<td><input name="txtUsername" class="texte_login maxwidth150onsmartphoneimp" type="text" value="<?php echo $usertxt; ?>" /></td>
 	</tr>
