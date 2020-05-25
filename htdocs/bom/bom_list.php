@@ -209,8 +209,10 @@ if (empty($reshook))
 
 			if (!$error)
 			{
-				if ($nbok > 1) setEventMessages($langs->trans("RecordsModified", $nbok), null, 'mesgs');
-				else setEventMessages($langs->trans("RecordsModified", $nbok), null, 'mesgs');
+				if ($nbok > 1){
+					setEventMessages($langs->trans("RecordsModified", $nbok), null, 'mesgs');
+				}	
+				
 				$db->commit();
 			}
 			else
@@ -264,8 +266,10 @@ if (empty($reshook))
 
 			if (! $error)
 			{
-				if ($nbok > 1) setEventMessages($langs->trans("RecordsModified", $nbok), null, 'mesgs');
-				else setEventMessages($langs->trans("RecordsModified", $nbok), null, 'mesgs');
+				if ($nbok > 1){
+					setEventMessages($langs->trans("RecordsModified", $nbok), null, 'mesgs');
+				}	
+				
 				$db->commit();
 			}
 			else
