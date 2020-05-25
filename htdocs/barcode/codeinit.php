@@ -234,7 +234,7 @@ if ($conf->societe->enabled)
 
 	print $langs->trans("CurrentlyNWithoutBarCode", $nbno, $nbtotal, $langs->transnoentitiesnoconv("ThirdParties")).'<br>'."\n";
 
-	print '<br><input class="button" type="submit" id="submitformbarcodethirdpartygen" '.((GETPOST("selectorforbarcode") && GETPOST("selectorforbarcode"))?'':'disabled ').'value="'.$langs->trans("InitEmptyBarCode", $nbno).'"';
+	print '<br><input class="button" type="submit" id="submitformbarcodethirdpartygen" '.((GETPOST("selectorforbarcode"))?'':'disabled ').'value="'.$langs->trans("InitEmptyBarCode", $nbno).'"';
 	print ' title="'.dol_escape_htmltag($langs->trans("FeatureNotYetAvailable")).'" disabled';
 	print '>';
 	print '<br><br><br><br>';
