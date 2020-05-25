@@ -49,7 +49,7 @@
 
 </div>
 </div> <!-- end div left -->
-<td class="center" valign="middle">-->
+<td class="center" >-->
 <div id="login_right" style="display: inline-block; min-width: 250px; margin: 0 auto;">
 
 <img alt="Logo" title="" src="/dolibarrnew/theme/dolibarr_logo.png" id="img_logo" />
