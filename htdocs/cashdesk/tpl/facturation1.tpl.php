@@ -46,7 +46,8 @@ $langs->loadLangs(array("main","bills","cashdesk"));
 		<input type="hidden" name="hdnSource" value="NULL" />
 
 		<table class="center">
-			<tr><th class="label1"><?php echo $langs->trans("FilterRefOrLabelOrBC"); ?></th><th class="label1"><?php echo $langs->trans("Designation"); ?></th></tr>
+			<caption>New</caption>
+			<tr><th scope="col">label</th><?php echo $langs->trans("FilterRefOrLabelOrBC"); ?></th><th scope="col">label1</th><?php echo $langs->trans("Designation"); ?></th></tr>
 			<tr>
 			<!-- Affichage de la reference et de la designation -->
 			<!-- Suppression de l'attribut onkeyup qui causait un probleme d'emulation avec les douchettes -->
@@ -93,11 +94,12 @@ for ($i = 0; $i < $nbtoshow; $i++)
 		<input type="hidden" name="token" value="<?php echo newToken(); ?>" />
 		<table class="center">
 			<tr>
-			<th><?php echo $langs->trans("Qty"); ?></th>
-			<th><?php echo $langs->trans("PriceUHT"); ?></th>
-			<th><?php echo $langs->trans("Discount"); ?> (%)</th>
-            <th><?php echo $langs->trans("VATRate"); ?></th>
-			<th></th>
+				<caption>New</caption>
+			<th scope="col">Name</th> <?php echo $langs->trans("Qty"); ?></th>
+			<th scope="col">Nae</th> <?php echo $langs->trans("PriceUHT"); ?></th>
+			<th scope="col">Nam</th> <?php echo $langs->trans("Discount"); ?> (%)</th>
+            		<th scope="col">N</th> <?php echo $langs->trans("VATRate"); ?></th>
+			<th scope="col">Ne</th> </th>
             </tr>
 			<tr>
 				<td><input class="texte1 maxwidth50onsmartphone" type="text" id="txtQte" name="txtQte" value="1" onkeyup="javascript: modif();" onfocus="javascript: this.select();" />
@@ -146,7 +148,8 @@ for ($i = 0; $i < $nbtoshow; $i++)
 	<input type="hidden" name="token" value="<?php echo newToken(); ?>" />
 <fieldset class="cadre_facturation"><legend class="titre1"><?php echo $langs->trans("Amount"); ?></legend>
 		<table class="centpercent">
-			<tr><th class="label1"><?php echo $langs->trans("TotalTicket"); ?></th><th class="label1"><?php echo $langs->trans("Received"); ?></th><th class="label1"><?php echo $langs->trans("Change"); ?></th></tr>
+			<caption>New</caption>
+			<tr><th scope="col">label1</th><?php echo $langs->trans("TotalTicket"); ?></th><th scope="col">label1</th><?php echo $langs->trans("Received"); ?></th><th scope="col">label1</th><?php echo $langs->trans("Change"); ?></th></tr>
 			<tr>
 			<!-- Affichage du montant du -->
 			<td><input class="texte2_off maxwidth100onsmartphone" type="text" name="txtDu" value="<?php echo price2num($obj_facturation->prixTotalTtc(), 'MT'); ?>" disabled /></td>
