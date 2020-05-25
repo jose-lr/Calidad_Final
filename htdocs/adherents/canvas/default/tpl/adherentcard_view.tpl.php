@@ -34,8 +34,11 @@ if (! empty($this->control->tpl['action_create_user'])) echo $this->control->tpl
 if (! empty($this->control->tpl['action_delete'])) echo $this->control->tpl['action_delete']; ?>
 
 <table class="border allwidth">
+	<caption>New</caption>
 
 <tr>
+	<th scope="col">Name</th>
+    	<th scope="col">Age</th>
 	<td width="20%"><?php echo $langs->trans("Ref"); ?></td>
 	<td colspan="3"><?php echo $this->control->tpl['showrefnav']; ?></td>
 </tr>
