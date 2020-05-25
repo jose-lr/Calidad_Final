@@ -1,7 +1,7 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- BEGIN PHP TEMPLATE LOGIN.TPL.PHP -->
-<html>
+<html lang="en" xml:lang="en">
 
 <head>
 <meta name="robots" content="noindex,nofollow" />
@@ -28,9 +28,11 @@
 <div id="login_left" style="display: inline-block; min-width: 250px; margin: 0 auto;"><div class="center">
 
 <table class="none center" <summary>Login pass</summary> padding:2px>
-
+  <caption>New</caption>
 <!-- Login -->
 <tr>
+  <th scope="col">Name</th>
+  <th scope="col">Age</th>
 <td vertical-align: bottom;> &nbsp; <strong><label for="username">Login</label></strong>fds fs df sdf gdsfgsdf r &nbsp; </td>
 <td vertical-align: bottom class="nowrap">
 <input type="text" id="username" name="username" class="flat" size="15" maxlength="40" value="" tabindex="1" />
