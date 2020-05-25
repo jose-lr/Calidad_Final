@@ -23,47 +23,47 @@
  *		\remarks	Put here some comments
  */
 
-$sapi_type = php_sapi_name();
-$script_file = basename(__FILE__);
-$path=dirname(__FILE__).'/';
+$sapi_type2 = php_sapi_name();
+$script_file2 = basename(__FILE__);
+$path2=dirname(__FILE__).'/';
 
 // Test if batch mode
-if (substr($sapi_type, 0, 3) == 'cgi') {
-    echo "Error: You are using PHP for CGI. To execute ".$script_file." from command line, you must use PHP for CLI mode.\n";
+if (substr($sapi_type2, 0, 3) == 'cgi') {
+    echo "Error: You are using PHP for CGI. To execute ".$script_file2." from command line, you must use PHP for CLI mode.\n";
     exit;
 }
 
 // Global variables
-$version='1.7';
-$error=0;
+$version2='1.7';
+$error2=0;
 
 
 // -------------------- START OF YOUR CODE HERE --------------------
 // Include Dolibarr environment
-require_once $path."../../htdocs/master.inc.php";
+require_once $path2."../../htdocs/master.inc.php";
 // After this $db, $mysoc, $langs and $conf->entity are defined. Opened handler to database will be closed at end of file.
 
 //$langs->setDefaultLang('en_US'); 	// To change default language of $langs
-$langs->load("main");				// To load language file for default language
+$langs2->load("main");				// To load language file for default language
 @set_time_limit(0);
 
 // Load user and its permissions
-$result=$user->fetch('', 'admin');	// Load user for login 'admin'. Comment line to run as anonymous user.
-if (! $result > 0) { dol_print_error('', $user->error); exit; }
-$user->getrights();
+$result2=$user2->fetch('', 'admin');	// Load user for login 'admin'. Comment line to run as anonymous user.
+if (! $result2 > 0) { dol_print_error('', $user2->error); exit; }
+$user2->getrights();
 
 
-print "***** ".$script_file." (".$version.") *****\n";
+print "***** ".$script_file2." (".$version2.") *****\n";
 
 // Start of transaction
-$db->begin();
+$db2->begin();
 
 require_once DOL_DOCUMENT_ROOT."/user/class/user.class.php";
 
 // Create user object
-$obj = new User($db);
+$obj = new User($db2);
 
 $obj->login = 'ABCDEF';
 $obj->nom   = 'ABCDEF';
 
-return $error;
+return $error2;
