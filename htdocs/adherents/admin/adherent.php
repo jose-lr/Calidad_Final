@@ -86,18 +86,19 @@ if ($action == 'update' || $action == 'add')
 	$constname=GETPOST('constname', 'ALPHA');
 	$constvalue=(GETPOST('constvalue_'.$constname) ? GETPOST('constvalue_'.$constname) : GETPOST('constvalue'));
 
-	if (($constname=='ADHERENT_CARD_TYPE' || $constname=='ADHERENT_ETIQUETTE_TYPE' || $constname=='ADHERENT_PRODUCT_ID_FOR_SUBSCRIPTIONS') && $constvalue == -1) $constvalue='';
+	if (($constname=='ADHERENT_CARD_TYPE' || $constname=='ADHERENT_ETIQUETTE_TYPE' || $constname=='ADHERENT_PRODUCT_ID_FOR_SUBSCRIPTIONS') && $constvalue == -1){ $constvalue=''; }
 	if ($constname=='ADHERENT_LOGIN_NOT_REQUIRED') 
 	{
-		if ($constvalue) $constvalue=0;
-		else $constvalue=1;
+		if ($constvalue) { $constvalue=0;
+	      } else { $constvalue=1;
+              }
 	}
 
 	$consttype=GETPOST('consttype', 'ALPHA');
 	$constnote=GETPOST('constnote');
 	$res=dolibarr_set_const($db, $constname, $constvalue, $type[$consttype], 0, $constnote, $conf->entity);
 
-	if (! $res > 0) $error++;
+	if (! $res > 0){ $error++;}
 
 	if (! $error)
 	{
@@ -179,7 +180,7 @@ print "</td></tr>\n";
 
 print '<tr class="oddeven"><td>'.$langs->trans("MoreActionsOnSubscription").'</td>';
 $arraychoices=array('0'=>$langs->trans("None"));
-if (! empty($conf->banque->enabled)) $arraychoices['bankdirect']=$langs->trans("MoreActionBankDirect");
+if (! empty($conf->banque->enabled)){ $arraychoices['bankdirect']=$langs->trans("MoreActionBankDirect"); }
 if (! empty($conf->banque->enabled) && ! empty($conf->societe->enabled) && ! empty($conf->facture->enabled)) $arraychoices['invoiceonly']=$langs->trans("MoreActionInvoiceOnly");
 if (! empty($conf->banque->enabled) && ! empty($conf->societe->enabled) && ! empty($conf->facture->enabled)) $arraychoices['bankviainvoice']=$langs->trans("MoreActionBankViaInvoice");
 print '<td>';
