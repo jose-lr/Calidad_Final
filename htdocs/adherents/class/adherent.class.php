@@ -538,18 +538,8 @@ class Adherent extends CommonObject
 		dol_syslog(get_class($this)."::update notrigger=".$notrigger.", nosyncuser=".$nosyncuser.", nosyncuserpass=".$nosyncuserpass." nosyncthirdparty=".$nosyncthirdparty.", email=".$this->email);
 
 		// Clean parameters
-		$this->lastname     = trim($this->lastname)?trim($this->lastname):trim($this->lastname);
-		$this->firstname    = trim($this->firstname)?trim($this->firstname):trim($this->firstname);
-		$this->gender       = trim($this->gender);
-		$this->address      = ($this->address?$this->address:$this->address);
-		$this->zip          = ($this->zip?$this->zip:$this->zip);
-		$this->town         = ($this->town?$this->town:$this->town);
-		$this->country_id   = ($this->country_id > 0?$this->country_id:$this->country_id);
-		$this->state_id     = ($this->state_id > 0?$this->state_id:$this->state_id);
 		if (! empty($conf->global->MAIN_FIRST_TO_UPPER)) $this->lastname=ucwords(trim($this->lastname));
 		if (! empty($conf->global->MAIN_FIRST_TO_UPPER)) $this->firstname=ucwords(trim($this->firstname));
-		$this->note_public  = ($this->note_public?$this->note_public:$this->note_public);
-		$this->note_private = ($this->note_private?$this->note_private:$this->note_private);
 
 		// Check parameters
 		if (! empty($conf->global->ADHERENT_MAIL_REQUIRED) && ! isValidEMail($this->email))
