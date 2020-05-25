@@ -49,8 +49,11 @@ echo $this->control->tpl['ajax_selectcountry']; ?>
 <?php } ?>
 
 <table class="border allwidth">
+	<caption>New</caption>
 
 <tr>
+	<th scope="col">Name</th>
+    	<th scope="col">Age</th>
 	<td width="15%" class="fieldrequired"><?php echo $langs->trans("Lastname").' / '.$langs->trans("Label"); ?></td>
 	<td><input name="lastname" type="text" size="30" maxlength="80" value="<?php echo $this->control->tpl['name']; ?>"></td>
 	<td width="20%"><?php echo $langs->trans("Firstname"); ?></td>
