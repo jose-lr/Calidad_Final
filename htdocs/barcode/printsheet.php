@@ -54,7 +54,7 @@ $thirdpartytmp = new Societe($db);
  * Actions
  */
 
-if (GETPOST('submitproduct') && GETPOST('submitproduct'))
+if (GETPOST('submitproduct'))
 {
 	$action = ''; // We reset because we don't want to build doc
 	if (GETPOST('productid') > 0)
@@ -71,7 +71,7 @@ if (GETPOST('submitproduct') && GETPOST('submitproduct'))
 		}
 	}
 }
-if (GETPOST('submitthirdparty') && GETPOST('submitthirdparty'))
+if (GETPOST('submitthirdparty'))
 {
 	$action = ''; // We reset because we don't want to build doc
 	if (GETPOST('socid') > 0)
@@ -436,7 +436,7 @@ print '<br>';
 
 print '</div>';
 
-print '<br><input class="button" type="submit" id="submitformbarcodegen" '.((GETPOST("selectorforbarcode") && GETPOST("selectorforbarcode")) ? '' : 'disabled ').'value="'.$langs->trans("BuildPageToPrint").'">';
+print '<br><input class="button" type="submit" id="submitformbarcodegen" '.((GETPOST("selectorforbarcode")) ? '' : 'disabled ').'value="'.$langs->trans("BuildPageToPrint").'">';
 
 print '</form>';
 print '<br>';
