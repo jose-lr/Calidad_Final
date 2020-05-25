@@ -1620,17 +1620,6 @@ class Setup extends DolibarrApi
     			}
     			$out .= '</table>';
     			$out .= '</div>';
-
-
-    			// Show warning
-    			if (empty($tmpfilelist) && empty($tmpfilelist2) && empty($tmpfilelist3))
-    			{
-    				//setEventMessages($langs->trans("FileIntegrityIsStrictlyConformedWithReference"), null, 'mesgs');
-    			}
-    			else
-    			{
-    				//setEventMessages($langs->trans("FileIntegritySomeFilesWereRemovedOrModified"), null, 'warnings');
-    			}
     		}
     		else
     		{
