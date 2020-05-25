@@ -91,6 +91,9 @@ print $langs->trans("RestoreDesc3", $dolibarr_main_db_name).'<br><br>';
 <?php print $langs->trans("DatabaseName").' : <b>'.$dolibarr_main_db_name.'</b>'; ?><br><br>
 
 <table class="centpercent"><tr><td class="tdtop">
+	<th scope="col">Name</th>
+        <th scope="col">Age</th>
+	<caption>New</caption>
 
 <?php if ($conf->use_javascript_ajax) { ?>
 <div id="div_container_exportoptions">
