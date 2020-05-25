@@ -281,9 +281,7 @@
         <severity>5</severity>
     </rule>
 
-	<!--<rule ref="PEAR.Commenting.FunctionComment.MissingReturn">
-        <severity>0</severity>
-    </rule>-->
+
 
     <rule ref="PEAR.Commenting.FunctionComment.SpacingAfterParamType" />
 
