@@ -48,8 +48,8 @@ $langs1->load("main");				// To load language file for default language
 @set_time_limit(0);
 
 // Load user and its permissions
-$result=$user1->fetch('', 'admin');	// Load user for login 'admin'. Comment line to run as anonymous user.
-if (! $result > 0) { dol_print_error('', $user1->error); exit; }
+$result1=$user1->fetch('', 'admin');	// Load user for login 'admin'. Comment line to run as anonymous user.
+if (! $result1 > 0) { dol_print_error('', $user1->error); exit; }
 $user1->getrights();
 
 
