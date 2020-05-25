@@ -2,8 +2,6 @@
 // This source file must be UTF-8 encoded
 /*
 
-
-print 'Test to create a file on disk with name '.$filename."<br>\n";
 print 'ENV[LANG]='.$_ENV["LANG"]."<br>\n";
 print 'ENV[LANGUAGE]='.$_ENV["LANGUAGE"]."<br>\n";
 
