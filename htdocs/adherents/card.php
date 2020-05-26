@@ -43,6 +43,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/html.formcompany.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
 const MEMBERS="members";
 const OTHER='other';
+const ROWID='rowid';
 // Load translation files required by the page
 $langs->loadLangs(array("companies", "bills", "MEMBERS", "users", "OTHER", "paypal"));
 const CONST_ALPHA='alpha';
@@ -51,7 +52,7 @@ $action = GETPOST('action', 'CONST_ALPHA');
 $cancel = GETPOST('cancel', 'CONST_ALPHA');
 $backtopage = GETPOST('BACK_TO_PAGE', 'CONST_ALPHA');
 $confirm = GETPOST('confirm', 'CONST_ALPHA');
-$rowid = GETPOST('rowid', 'int');
+$rowid = GETPOST('ROWID', 'int');
 $id = GETPOST('id') ?GETPOST('id', 'int') : $rowid;
 $typeid = GETPOST('typeid', 'int');
 $userid = GETPOST('userid', 'int');
@@ -86,7 +87,7 @@ if (!empty($canvas))
 }
 
 // Security check
-$result = restrictedArea($user, 'adherent', $id, '', '', 'socid', 'rowid', $objcanvas);
+$result = restrictedArea($user, 'adherent', $id, '', '', 'socid', 'ROWID', $objcanvas);
 
 if ($id > 0)
 {
@@ -123,7 +124,7 @@ $hookmanager->initHooks(array('membercard', 'globalcard'));
  * 	Actions
  */
 
-$parameters = array('id'=>$id, 'rowid'=>$id, 'objcanvas'=>$objcanvas, 'confirm'=>$confirm);
+$parameters = array('id'=>$id, 'ROWID'=>$id, 'objcanvas'=>$objcanvas, 'confirm'=>$confirm);
 $reshook = $hookmanager->executeHooks('doActions', $parameters, $object, $action); // Note that $action and $object may have been modified by some hooks
 if ($reshook < 0) setEventMessages($hookmanager->error, $hookmanager->errors, 'errors');
 
@@ -1588,7 +1589,7 @@ else
 
 		$linkback = '<a href="'.DOL_URL_ROOT.'/adherents/list.php?restore_lastsearch_values=1">'.$langs->trans("BackToList").'</a>';
 
-		dol_banner_tab($object, 'rowid', $linkback);
+		dol_banner_tab($object, 'ROWID', $linkback);
 
         print '<div class="fichecenter">';
         print '<div class="fichehalfleft">';
