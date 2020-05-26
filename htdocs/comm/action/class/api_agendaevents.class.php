@@ -46,7 +46,7 @@ class AgendaEvents extends DolibarrApi
      */
     public function __construct()
     {
-        global $db, $conf;
+        global $db, $conf, $request_data;
         $this->db = $db;
         $this->actioncomm = new ActionComm($this->db);
     }
