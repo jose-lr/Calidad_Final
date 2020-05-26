@@ -26,15 +26,15 @@ if (empty($conf) || ! is_object($conf))
 ?>
 
 <!-- BEGIN PHP TEMPLATE ADHERENTCARD_CREATE.TPL.PHP DEFAULT -->
-
 <?php
+const ERROR='error';
 print load_fiche_titre($this->control->tpl['title']);
 
 dol_htmloutput_errors((is_numeric($object->error)?'':$object->error), $object->errors);
 
-dol_htmloutput_errors((is_numeric($GLOBALS['error'])?'':$GLOBALS['error']), $GLOBALS['errors']);
+dol_htmloutput_errors((is_numeric($GLOBALS['ERROR'])?'':$GLOBALS['ERROR']), $GLOBALS['errors']);
 
-dol_htmloutput_errors($this->control->tpl['error'], $this->control->tpl['errors']);
+dol_htmloutput_errors($this->control->tpl['ERROR'], $this->control->tpl['errors']);
 
 echo $this->control->tpl['ajax_selectcountry']; ?>
 
