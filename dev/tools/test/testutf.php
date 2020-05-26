@@ -2,7 +2,7 @@
 // This source file must be UTF-8 encoded
 /*
 
-print 'ENV[LANG]='.$_ENV["LANG"]."<br>\n";
+
 print 'ENV[LANGUAGE]='.$_ENV["LANGUAGE"]."<br>\n";
 
 // Si LANG contient UTF8, system en UTF8, pas de conversion requise pour fopen
