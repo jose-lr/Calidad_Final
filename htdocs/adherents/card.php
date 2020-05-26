@@ -41,9 +41,9 @@ require_once DOL_DOCUMENT_ROOT.'/compta/bank/class/account.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formcompany.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
-
+const MEMBERS="members";
 // Load translation files required by the page
-$langs->loadLangs(array("companies", "bills", "members", "users", "other", "paypal"));
+$langs->loadLangs(array("companies", "bills", "MEMBERS", "users", "other", "paypal"));
 
 $action = GETPOST('action', 'alpha');
 $cancel = GETPOST('cancel', 'alpha');
@@ -655,7 +655,7 @@ if (empty($reshook))
 				$outputlangs = new Translate('', $conf);
 				$outputlangs->setDefaultLang(empty($object->thirdparty->default_lang) ? $mysoc->default_lang : $object->thirdparty->default_lang);
 				// Load traductions files required by page
-				$outputlangs->loadLangs(array("main", "members"));
+				$outputlangs->loadLangs(array("main", "MEMBERS"));
 				// Get email content from template
 				$arraydefaultmessage = null;
 				$labeltouse = $conf->global->ADHERENT_EMAIL_TEMPLATE_MEMBER_VALIDATION;
@@ -734,7 +734,7 @@ if (empty($reshook))
 					$outputlangs = new Translate('', $conf);
 					$outputlangs->setDefaultLang(empty($object->thirdparty->default_lang) ? $mysoc->default_lang : $object->thirdparty->default_lang);
 					// Load traductions files required by page
-					$outputlangs->loadLangs(array("main", "members"));
+					$outputlangs->loadLangs(array("main", "MEMBERS"));
 					// Get email content from template
 					$arraydefaultmessage = null;
 					$labeltouse = $conf->global->ADHERENT_EMAIL_TEMPLATE_CANCELATION;
@@ -893,7 +893,7 @@ else
 
 		$adht = new AdherentType($db);
 
-		print load_fiche_titre($langs->trans("NewMember"), '', 'members');
+		print load_fiche_titre($langs->trans("NewMember"), '', 'MEMBERS');
 
 		if ($conf->use_javascript_ajax)
 		{
@@ -1462,7 +1462,7 @@ else
 			$outputlangs = new Translate('', $conf);
 			$outputlangs->setDefaultLang(empty($object->thirdparty->default_lang) ? $mysoc->default_lang : $object->thirdparty->default_lang);
 			// Load traductions files required by page
-			$outputlangs->loadLangs(array("main", "members"));
+			$outputlangs->loadLangs(array("main", "MEMBERS"));
 			// Get email content from template
 			$arraydefaultmessage = null;
 			$labeltouse = $conf->global->ADHERENT_EMAIL_TEMPLATE_MEMBER_VALIDATION;
@@ -1523,7 +1523,7 @@ else
 			$outputlangs = new Translate('', $conf);
 			$outputlangs->setDefaultLang(empty($object->thirdparty->default_lang) ? $mysoc->default_lang : $object->thirdparty->default_lang);
 			// Load traductions files required by page
-			$outputlangs->loadLangs(array("main", "members"));
+			$outputlangs->loadLangs(array("main", "MEMBERS"));
 			// Get email content from template
 			$arraydefaultmessage = null;
 			$labeltouse = $conf->global->ADHERENT_EMAIL_TEMPLATE_CANCELATION;
