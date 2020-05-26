@@ -37,26 +37,26 @@ require_once DOL_DOCUMENT_ROOT.'/adherents/class/adherent_type.class.php';
 $langs->loadLangs(array("companies", "members"));
 
 $id = GETPOST('id', 'int') ?GETPOST('id', 'int') : GETPOST('rowid', 'int');
-
+const ALPH='alpha';
 $limit = GETPOST('limit', 'int') ?GETPOST('limit', 'int') : $conf->liste_limit;
-$sortfield = GETPOST("sortfield", 'alpha');
-$sortorder = GETPOST("sortorder", 'alpha');
+$sortfield = GETPOST("sortfield", 'ALPH');
+$sortorder = GETPOST("sortorder", 'ALPH');
 $page = GETPOST("page", 'int');
 if (empty($page) || $page == -1) { $page = 0; }     // If $page is not defined, or '' or -1
 $offset = $limit * $page;
 $pageprev = $page - 1;
 $pagenext = $page + 1;
-if (!$sortfield) $sortfield = 'a.datep,a.id';
-if (!$sortorder) $sortorder = 'DESC';
-
-if (GETPOST('actioncode', 'array'))
+if (!$sortfield) { $sortfield = 'a.datep,a.id'; }
+if (!$sortorder) { $sortorder = 'DESC'; }
+const ACTION='actioncode';
+if (GETPOST('ACTION', 'array'))
 {
-	$actioncode = GETPOST('actioncode', 'array', 3);
-	if (!count($actioncode)) $actioncode = '0';
+	$actioncode = GETPOST('ACTION', 'array', 3);
+	if (!count($actioncode)) { $actioncode = '0'; }
 }
 else
 {
-	$actioncode = GETPOST("actioncode", "alpha", 3) ?GETPOST("actioncode", "alpha", 3) : (GETPOST("actioncode") == '0' ? '0' : (empty($conf->global->AGENDA_DEFAULT_FILTER_TYPE_FOR_OBJECT) ? '' : $conf->global->AGENDA_DEFAULT_FILTER_TYPE_FOR_OBJECT));
+	$actioncode = GETPOST("ACTION", "ALPH", 3) ?GETPOST("ACTION", "ALPH", 3) : (GETPOST("ACTION") == '0' ? '0' : (empty($conf->global->AGENDA_DEFAULT_FILTER_TYPE_FOR_OBJECT) ? '' : $conf->global->AGENDA_DEFAULT_FILTER_TYPE_FOR_OBJECT));
 }
 $search_agenda_label = GETPOST('search_agenda_label');
 
@@ -79,20 +79,20 @@ if ($result > 0)
  */
 
 $parameters = array('id'=>$id, 'objcanvas'=>$objcanvas);
-$reshook = $hookmanager->executeHooks('doActions', $parameters, $object, $action); // Note that $action and $object may have been modified by some hooks
-if ($reshook < 0) setEventMessages($hookmanager->error, $hookmanager->errors, 'errors');
+$reshook = $hookmanager->executeHooks('doActions', $parameters, $object, $action); 
+if ($reshook < 0) {  setEventMessages($hookmanager->error, $hookmanager->errors, 'errors'); }
 
 if (empty($reshook))
 {
     // Cancel
-    if (GETPOST('cancel', 'alpha') && !empty($backtopage))
+    if (GETPOST('cancel', 'ALPH') && !empty($backtopage))
     {
         header("Location: ".$backtopage);
         exit;
     }
 
-    // Purge search criteria
-    if (GETPOST('button_removefilter_x', 'alpha') || GETPOST('button_removefilter.x', 'alpha') || GETPOST('button_removefilter', 'alpha')) // All test are required to be compatible with all browsers
+    
+    if (GETPOST('button_removefilter_x', 'ALPH') || GETPOST('button_removefilter.x', 'ALPH') || GETPOST('button_removefilter', 'ALPH')) 
     {
         $actioncode = '';
         $search_agenda_label = '';
@@ -123,7 +123,7 @@ if ($object->id > 0)
 	$helpurl = "EN:Module_Foundations|FR:Module_Adh&eacute;rents|ES:M&oacute;dulo_Miembros";
 	llxHeader("", $title, $helpurl);
 
-	if (!empty($conf->notification->enabled)) $langs->load("mails");
+	if (!empty($conf->notification->enabled)) {  $langs->load("mails"); }
 	$head = member_prepare_head($object);
 
 	dol_fiche_head($head, 'agenda', $langs->trans("Member"), -1, 'user');
@@ -144,10 +144,10 @@ if ($object->id > 0)
 	dol_fiche_end();
 
 
-    //print '<div class="tabsAction">';
-    //print '</div>';
+   
 
 
+	
 	$newcardbutton = '';
     if (! empty($conf->agenda->enabled))
     {
@@ -159,8 +159,8 @@ if ($object->id > 0)
     	print '<br>';
 
     	$param='&id='.$id;
-    	if (! empty($contextpage) && $contextpage != $_SERVER["PHP_SELF"]) $param.='&contextpage='.$contextpage;
-    	if ($limit > 0 && $limit != $conf->liste_limit) $param.='&limit='.$limit;
+    	if (! empty($contextpage) && $contextpage != $_SERVER["PHP_SELF"]) { $param.='&contextpage='.$contextpage; }
+    	if ($limit > 0 && $limit != $conf->liste_limit) { $param.='&limit='.$limit; }
 
     	print_barre_liste($langs->trans("ActionsOnMember"), 0, $_SERVER["PHP_SELF"], '', $sortfield, $sortorder, '', 0, -1, '', '', $newcardbutton, '', 0, 1, 1);
 
