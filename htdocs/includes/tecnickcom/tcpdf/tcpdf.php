@@ -38,7 +38,7 @@
 //   new lines of code and hundreds new features.
 //
 // Main features:
-//  * no external libraries are required for the basic functions;
+
 //  * all standard page formats, custom page formats, custom margins and units of measure;
 //  * UTF-8 Unicode and Right-To-Left languages;
 //  * TrueTypeUnicode, TrueType, Type1 and CID-0 fonts;
@@ -46,7 +46,7 @@
 //  * methods to publish some XHTML + CSS code, Javascript and Forms;
 //  * images, graphic (geometric figures) and transformation methods;
 //  * supports JPEG, PNG and SVG images natively, all images supported by GD (GD, GD2, GD2PART, GIF, JPEG, PNG, BMP, XBM, XPM) and all images supported via ImageMagick (http://www.imagemagick.org/www/formats.html)
-//  * 1D and 2D barcodes: CODE 39, ANSI MH10.8M-1983, USD-3, 3 of 9, CODE 93, USS-93, Standard 2 of 5, Interleaved 2 of 5, CODE 128 A/B/C, 2 and 5 Digits UPC-Based Extension, EAN 8, EAN 13, UPC-A, UPC-E, MSI, POSTNET, PLANET, RMS4CC (Royal Mail 4-state Customer Code), CBC (Customer Bar Code), KIX (Klant index - Customer index), Intelligent Mail Barcode, Onecode, USPS-B-3200, CODABAR, CODE 11, PHARMACODE, PHARMACODE TWO-TRACKS, Datamatrix, QR-Code, PDF417;
+
 //  * JPEG and PNG ICC profiles, Grayscale, RGB, CMYK, Spot Colors and Transparencies;
 //  * automatic page header and footer management;
 //  * document encryption up to 256 bit and digital signature certifications;
@@ -1854,7 +1854,7 @@ class TCPDF {
 	 */
 	public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $pdfa=false) {
 		/* Set internal character encoding to ASCII */
-		if (function_exists('mb_internal_encoding') AND mb_internal_encoding()) {
+		if (function_exists('mb_internal_encoding') && mb_internal_encoding()) {
 			$this->internal_encoding = mb_internal_encoding();
 			mb_internal_encoding('ASCII');
 		}
@@ -1869,9 +1869,9 @@ class TCPDF {
 		if ($pdfa != false) {
 			$this->pdfa_mode = true;
 			$this->pdfa_version = $pdfa;  // 1 or 3
-		} else
+		} else {
 			$this->pdfa_mode = false;
-
+		        }
 		$this->force_srgb = false;
 		// set language direction
 		$this->rtl = false;
@@ -1986,12 +1986,8 @@ class TCPDF {
 		$this->setHeaderFont(array($this->FontFamily, $this->FontStyle, $this->FontSizePt));
 		$this->setFooterFont(array($this->FontFamily, $this->FontStyle, $this->FontSizePt));
 		// check if PCRE Unicode support is enabled
-		if ($this->isunicode AND (@preg_match('/\pL/u', 'a') == 1)) {
-			// PCRE unicode support is turned ON
-			// \s     : any whitespace character
-			// \p{Z}  : any separator
-			// \p{Lo} : Unicode letter or ideograph that does not have lowercase and uppercase variants. Is used to chunk chinese words.
-			// \xa0   : Unicode Character 'NO-BREAK SPACE' (U+00A0)
+		if ($this->isunicode && (@preg_match('/\pL/u', 'a') == 1)) {
+			
 			//$this->setSpacesRE('/(?!\xa0)[\s\p{Z}\p{Lo}]/u');
 			$this->setSpacesRE('/(?!\xa0)[\s\p{Z}]/u');
 		} else {
@@ -2121,7 +2117,7 @@ class TCPDF {
 	 * @see getPageSizeFromFormat()
 	 */
 	protected function setPageFormat($format, $orientation='P') {
-		if (!empty($format) AND isset($this->pagedim[$this->page])) {
+		if (!empty($format) && isset($this->pagedim[$this->page])) {
 			// remove inherited values
 			unset($this->pagedim[$this->page]);
 		}
@@ -2137,7 +2133,7 @@ class TCPDF {
 				$this->fwPt = (($format['MediaBox']['urx'] - $format['MediaBox']['llx']) * $this->k);
 				$this->fhPt = (($format['MediaBox']['ury'] - $format['MediaBox']['lly']) * $this->k);
 			} else {
-				if (isset($format[0]) AND is_numeric($format[0]) AND isset($format[1]) AND is_numeric($format[1])) {
+				if (isset($format[0]) && is_numeric($format[0]) && isset($format[1]) && is_numeric($format[1])) {
 					$pf = array(($format[0] * $this->k), ($format[1] * $this->k));
 				} else {
 					if (!isset($format['format'])) {
@@ -2185,31 +2181,31 @@ class TCPDF {
 					$this->pagedim[$this->page]['trans']['Dur'] = floatval($format['trans']['Dur']);
 				}
 				$stansition_styles = array('Split', 'Blinds', 'Box', 'Wipe', 'Dissolve', 'Glitter', 'R', 'Fly', 'Push', 'Cover', 'Uncover', 'Fade');
-				if (isset($format['trans']['S']) AND in_array($format['trans']['S'], $stansition_styles)) {
+				if (isset($format['trans']['S']) && in_array($format['trans']['S'], $stansition_styles)) {
 					// The transition style that shall be used when moving to this page from another during a presentation
 					$this->pagedim[$this->page]['trans']['S'] = $format['trans']['S'];
 					$valid_effect = array('Split', 'Blinds');
 					$valid_vals = array('H', 'V');
-					if (isset($format['trans']['Dm']) AND in_array($format['trans']['S'], $valid_effect) AND in_array($format['trans']['Dm'], $valid_vals)) {
+					if (isset($format['trans']['Dm']) && in_array($format['trans']['S'], $valid_effect) && in_array($format['trans']['Dm'], $valid_vals)) {
 						$this->pagedim[$this->page]['trans']['Dm'] = $format['trans']['Dm'];
 					}
 					$valid_effect = array('Split', 'Box', 'Fly');
 					$valid_vals = array('I', 'O');
-					if (isset($format['trans']['M']) AND in_array($format['trans']['S'], $valid_effect) AND in_array($format['trans']['M'], $valid_vals)) {
+					if (isset($format['trans']['M']) && in_array($format['trans']['S'], $valid_effect) && in_array($format['trans']['M'], $valid_vals)) {
 						$this->pagedim[$this->page]['trans']['M'] = $format['trans']['M'];
 					}
 					$valid_effect = array('Wipe', 'Glitter', 'Fly', 'Cover', 'Uncover', 'Push');
-					if (isset($format['trans']['Di']) AND in_array($format['trans']['S'], $valid_effect)) {
-						if (((($format['trans']['Di'] == 90) OR ($format['trans']['Di'] == 180)) AND ($format['trans']['S'] == 'Wipe'))
-							OR (($format['trans']['Di'] == 315) AND ($format['trans']['S'] == 'Glitter'))
-							OR (($format['trans']['Di'] == 0) OR ($format['trans']['Di'] == 270))) {
+					if (isset($format['trans']['Di']) && in_array($format['trans']['S'], $valid_effect)) {
+						if (((($format['trans']['Di'] == 90) || ($format['trans']['Di'] == 180)) && ($format['trans']['S'] == 'Wipe'))
+							|| (($format['trans']['Di'] == 315) && ($format['trans']['S'] == 'Glitter'))
+							|| (($format['trans']['Di'] == 0) || ($format['trans']['Di'] == 270))) {
 							$this->pagedim[$this->page]['trans']['Di'] = intval($format['trans']['Di']);
 						}
 					}
-					if (isset($format['trans']['SS']) AND ($format['trans']['S'] == 'Fly')) {
+					if (isset($format['trans']['SS']) && ($format['trans']['S'] == 'Fly')) {
 						$this->pagedim[$this->page]['trans']['SS'] = floatval($format['trans']['SS']);
 					}
-					if (isset($format['trans']['B']) AND ($format['trans']['B'] === true) AND ($format['trans']['S'] == 'Fly')) {
+					if (isset($format['trans']['B']) && ($format['trans']['B'] === true) && ($format['trans']['S'] == 'Fly')) {
 						$this->pagedim[$this->page]['trans']['B'] = 'true';
 					}
 				} else {
@@ -2276,7 +2272,7 @@ class TCPDF {
 		} else {
 			$orientation = strtoupper($orientation[0]);
 		}
-		if (in_array($orientation, $valid_orientations) AND ($orientation != $default_orientation)) {
+		if (in_array($orientation, $valid_orientations) && ($orientation != $default_orientation)) {
 			$this->CurOrientation = $orientation;
 			$this->wPt = $this->fhPt;
 			$this->hPt = $this->fwPt;
@@ -2285,7 +2281,7 @@ class TCPDF {
 			$this->wPt = $this->fwPt;
 			$this->hPt = $this->fhPt;
 		}
-		if ((abs($this->pagedim[$this->page]['MediaBox']['urx'] - $this->hPt) < $this->feps) AND (abs($this->pagedim[$this->page]['MediaBox']['ury'] - $this->wPt) < $this->feps)){
+		if ((abs($this->pagedim[$this->page]['MediaBox']['urx'] - $this->hPt) < $this->feps) && (abs($this->pagedim[$this->page]['MediaBox']['ury'] - $this->wPt) < $this->feps)){
 			// swap X and Y coordinates (change page orientation)
 			$this->pagedim = TCPDF_STATIC::swapPageBoxCoordinates($this->page, $this->pagedim);
 		}
@@ -2351,7 +2347,7 @@ class TCPDF {
 			$this->re_space['p'] = '[\s]';
 		}
 		// set pattern modifiers
-		if (isset($re_parts[2]) AND !empty($re_parts[2])) {
+		if (isset($re_parts[2]) && !empty($re_parts[2])) {
 			$this->re_space['m'] = $re_parts[2];
 		} else {
 			$this->re_space['m'] = '';
@@ -2367,7 +2363,7 @@ class TCPDF {
 	 */
 	public function setRTL($enable, $resetx=true) {
 		$enable = $enable ? true : false;
-		$resetx = ($resetx AND ($enable != $this->rtl));
+		$resetx = ($resetx && ($enable != $this->rtl));
 		$this->rtl = $enable;
 		$this->tmprtl = false;
 		if ($resetx) {
@@ -2424,7 +2420,7 @@ class TCPDF {
 	 * @since 4.8.014 (2009-11-04)
 	 */
 	public function isRTLTextDir() {
-		return ($this->rtl OR ($this->tmprtl == 'R'));
+		return ($this->rtl || ($this->tmprtl == 'R'));
 	}
 
 	/**
