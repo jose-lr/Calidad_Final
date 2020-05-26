@@ -314,7 +314,7 @@ if (empty($reshook))
 				}
 			}
 			
-			//$object->twitter     = trim(GETPOST("twitter", 'alpha'));
+		
 			//$object->facebook    = trim(GETPOST("facebook", 'alpha'));
 			//$object->linkedin    = trim(GETPOST("linkedin", 'alpha'));
 			$object->birth       = $birthdate;
@@ -460,9 +460,7 @@ if (empty($reshook))
 		$phone_perso = GETPOST("phone_perso", 'CONST_ALPHA');
 		$phone_mobile = GETPOST("phone_mobile", 'CONST_ALPHA');
 		
-		// $twitter=GETPOST("member_twitter", 'alpha');
-		// $facebook=GETPOST("member_facebook", 'alpha');
-        // $linkedin=GETPOST("member_linkedin", 'alpha');
+		
 		$email = preg_replace('/\s+/', '', GETPOST("member_email", 'CONST_ALPHA'));
 		$login = GETPOST("member_login", 'CONST_ALPHA');
 		$pass = GETPOST("password", 'CONST_ALPHA');
@@ -499,9 +497,7 @@ if (empty($reshook))
 		}
 
 		
-		// $object->twitter     = $twitter;
-		// $object->facebook    = $facebook;
-		// $object->linkedin    = $linkedin;
+		
 
 		$object->email       = $email;
 		$object->login       = $login;
