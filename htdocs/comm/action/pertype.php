@@ -490,13 +490,7 @@ if ($resql)
         	$event->date_start_in_calendar = $datep;
         	if ($datep2 != '' && $datep2 >= $datep) $event->date_end_in_calendar = $datep2;
         	else $event->date_end_in_calendar = $datep;
-        }
-        else
-        {
-        	$event->date_start_in_calendar = $datep;
-        	if ($datep2 != '' && $datep2 >= $datep) $event->date_end_in_calendar = $datep2;
-        	else $event->date_end_in_calendar = $datep;
-        }
+	}
         // Define ponctual property
         if ($event->date_start_in_calendar == $event->date_end_in_calendar)
         {
