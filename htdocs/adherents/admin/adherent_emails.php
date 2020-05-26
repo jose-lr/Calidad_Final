@@ -149,8 +149,7 @@ $head = member_admin_prepare_head();
 
 dol_fiche_head($head, 'emails', $langs->trans("Members"), -1, 'user');
 
-// TODO Use global form
-//print '<input type="hidden" name="token" value="'.newToken().'">';
+
 //print '<input type="hidden" name="action" value="updateall">';
 
 $helptext='*'.$langs->trans("FollowingConstantsWillBeSubstituted").'<br>';
