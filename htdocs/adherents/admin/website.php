@@ -205,9 +205,9 @@ if (!empty($conf->global->MEMBER_ENABLE_PUBLIC))
 	$listofval=array();
 	$listofval['-1']=$langs->trans('No');
 	$listofval['all']=$langs->trans('Yes').' ('.$langs->trans("VisitorCanChooseItsPaymentMode").')';
-	if (! empty($conf->paybox->enabled)) $listofval['paybox']='Paybox';
-	if (! empty($conf->paypal->enabled)) $listofval['paypal']='PayPal';
-	if (! empty($conf->stripe->enabled)) $listofval['stripe']='Stripe';
+	if (! empty($conf->paybox->enabled)) { $listofval['paybox']='Paybox'; }
+	if (! empty($conf->paypal->enabled)) { $listofval['paypal']='PayPal'; }
+	if (! empty($conf->stripe->enabled)) { $listofval['stripe']='Stripe'; }
 	print $form->selectarray("MEMBER_NEWFORM_PAYONLINE", $listofval, (! empty($conf->global->MEMBER_NEWFORM_PAYONLINE)?$conf->global->MEMBER_NEWFORM_PAYONLINE:''), 0);
 	print "TD_TR_ETIQUETA_CIERRE";
 
