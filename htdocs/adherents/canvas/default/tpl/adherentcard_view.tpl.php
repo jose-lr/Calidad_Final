@@ -30,8 +30,8 @@ echo "<!-- BEGIN PHP TEMPLATE ADHERENTCARD_VIEW.TPL.PHP DEFAULT -->\n";
 echo $this->control->tpl['showhead'];
 
 dol_htmloutput_errors($this->control->tpl['error'], $this->control->tpl['errors']);
-if (! empty($this->control->tpl['action_create_user'])) echo $this->control->tpl['action_create_user'];
-if (! empty($this->control->tpl['action_delete'])) echo $this->control->tpl['action_delete']; ?>
+if (! empty($this->control->tpl['action_create_user'])) { echo $this->control->tpl['action_create_user']; }
+if (! empty($this->control->tpl['action_delete'])) { echo $this->control->tpl['action_delete']; ?> }
 
 <table class="border allwidth">
 	<caption>New</caption>
@@ -120,7 +120,7 @@ if (! empty($this->control->tpl['action_delete'])) echo $this->control->tpl['act
 </table>
 
 <?php echo $this->control->tpl['showend'];
-
+const PHP_SELF='PHP_SELF';
 if (empty($user->socid)) {
     echo '<div class="tabsAction">';
 
