@@ -60,9 +60,9 @@ class ActionsAdherentCardDefault extends ActionsAdherentCardCommon
 
 		$out='';
 
-		if ($action == 'view') 		$out.= (! empty($conf->global->ADHERENT_ADDRESSES_MANAGEMENT) ? $langs->trans("Adherent") : $langs->trans("ContactAddress"));
-		if ($action == 'edit') 		$out.= (! empty($conf->global->ADHERENT_ADDRESSES_MANAGEMENT) ? $langs->trans("EditAdherent") : $langs->trans("EditAdherentAddress"));
-		if ($action == 'create')	$out.= (! empty($conf->global->ADHERENT_ADDRESSES_MANAGEMENT) ? $langs->trans("NewAdherent") : $langs->trans("NewAdherentAddress"));
+		if ($action == 'view') 	{	$out.= (! empty($conf->global->ADHERENT_ADDRESSES_MANAGEMENT) ? $langs->trans("Adherent") : $langs->trans("ContactAddress")); }
+		if ($action == 'edit') 	{	$out.= (! empty($conf->global->ADHERENT_ADDRESSES_MANAGEMENT) ? $langs->trans("EditAdherent") : $langs->trans("EditAdherentAddress")); }
+		if ($action == 'create') {	$out.= (! empty($conf->global->ADHERENT_ADDRESSES_MANAGEMENT) ? $langs->trans("NewAdherent") : $langs->trans("NewAdherentAddress")); }
 
 		return $out;
 	}
@@ -82,7 +82,7 @@ class ActionsAdherentCardDefault extends ActionsAdherentCardCommon
 		global $conf, $db, $langs, $user;
 		global $form;
 
-		$ret = $this->getObject($id);
+		
 
         parent::assign_values($action, $id);
 
@@ -137,7 +137,7 @@ class ActionsAdherentCardDefault extends ActionsAdherentCardCommon
         // phpcs:enable
 		global $conf, $langs;
 
-        //$this->getFieldList();
+        
 
         $this->list_datas = array();
 	}
