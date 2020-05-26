@@ -61,18 +61,18 @@ abstract class ActionsAdherentCardCommon
      */
     public function getObject($id)
     {
-    	//$ret = $this->getInstanceDao();
+    	
 
     	/*if (is_object($this->object) && method_exists($this->object,'fetch'))
-    	{
+    	
     		if (! empty($id)) $this->object->fetch($id);
     	}
     	else
     	{*/
-    		$object = new Adherent($this->db);
-    		if (! empty($id)) $object->fetch($id);
+    		$object1 = new Adherent($this->db);
+    		if (! empty($id))  { $object->fetch($id); 
             $this->object = $object;
-    	//}
+    	}
     }
 
     // phpcs:disable PEAR.NamingConventions.ValidFunctionName.ScopeNotCamelCaps
@@ -83,13 +83,13 @@ abstract class ActionsAdherentCardCommon
      *  @param	int			$id			Id
      *  @return	string					HTML output
      */
-    public function assign_values(&$action, $id)
+    public function assign_values(&$action)
     {
         // phpcs:enable
         global $conf, $langs, $user, $canvas;
         global $form, $formcompany, $objsoc;
 
-        if ($action == 'add' || $action == 'update') $this->assign_post();
+        if ($action == 'add' || $action == 'update') { $this->assign_post(); }
 
         foreach($this->object as $key => $value)
         {
@@ -98,7 +98,11 @@ abstract class ActionsAdherentCardCommon
 
         $this->tpl['error']=$this->error;
         $this->tpl['errors']=$this->errors;
-
+const COMPANY='company';
+const ADDRESS='address';
+const ZIPCODE='zipcode';
+const STATEID='state_id';
+const COUNTRYID='country_id';
         if ($action == 'create' || $action == 'edit')
         {
         	if ($conf->use_javascript_ajax)
@@ -113,48 +117,47 @@ abstract class ActionsAdherentCardCommon
 					})
 				</script>'."\n";
 			}
-
+   
         	if (is_object($objsoc) && $objsoc->id > 0)
         	{
-        		$this->tpl['company'] = $objsoc->getNomUrl(1);
+        		$this->tpl['COMPANY'] = $objsoc->getNomUrl(1);
         		$this->tpl['company_id'] = $objsoc->id;
         	}
         	else
         	{
-        		$this->tpl['company'] = $form->select_company($this->object->socid, 'socid', '', 1);
+        		$this->tpl['COMPANY'] = $form->select_company($this->object->socid, 'socid', '', 1);
         	}
 
         	// Civility
         	$this->tpl['select_civility'] = $formcompany->select_civility($this->object->civility_id);
 
         	// Predefined with third party
-        	if ((isset($objsoc->typent_code) && $objsoc->typent_code == 'TE_PRIVATE'))
+        	if (isset($objsoc->typent_code) && $objsoc->typent_code == 'TE_PRIVATE')
         	{
-        		if (dol_strlen(trim($this->object->address)) == 0) $this->tpl['address'] = $objsoc->address;
-        		if (dol_strlen(trim($this->object->zip)) == 0) $this->object->zip = $objsoc->zip;
-        		if (dol_strlen(trim($this->object->town)) == 0) $this->object->town = $objsoc->town;
-        		if (dol_strlen(trim($this->object->phone_perso)) == 0) $this->object->phone_perso = $objsoc->phone;
-        		if (dol_strlen(trim($this->object->phone_mobile)) == 0) $this->object->phone_mobile = $objsoc->phone_mobile;
-        		if (dol_strlen(trim($this->object->email)) == 0) $this->object->email = $objsoc->email;
+        		if (dol_strlen(trim($this->object->address)) == 0) { $this->tpl['ADDRESS'] = $objsoc->address; }
+        		if (dol_strlen(trim($this->object->zip)) == 0)  { $this->object->zip = $objsoc->zip; }
+        		if (dol_strlen(trim($this->object->town)) == 0) { $this->object->town = $objsoc->town; }
+        		if (dol_strlen(trim($this->object->phone_perso)) == 0) { $this->object->phone_perso = $objsoc->phone; }
+        		if (dol_strlen(trim($this->object->phone_mobile)) == 0) { $this->object->phone_mobile = $objsoc->phone_mobile; }
+        		if (dol_strlen(trim($this->object->email)) == 0) { $this->object->email = $objsoc->email; }
         	}
-
-            // Zip
-            $this->tpl['select_zip'] = $formcompany->select_ziptown($this->object->zip, 'zipcode', array('town','selectcountry_id','state_id'), 6);
+            
+            $this->tpl['select_zip'] = $formcompany->select_ziptown($this->object->zip, 'ZIPCODE', array('town','selectcountry_id','STATEID'), 6);
 
             // Town
-            $this->tpl['select_town'] = $formcompany->select_ziptown($this->object->town, 'town', array('zipcode','selectcountry_id','state_id'));
+            $this->tpl['select_town'] = $formcompany->select_ziptown($this->object->town, 'town', array('ZIPCODE','selectcountry_id','STATEID'));
 
-            if (dol_strlen(trim($this->object->country_id)) == 0) $this->object->country_id = $objsoc->country_id;
+            if (dol_strlen(trim($this->object->country_id)) == 0) { $this->object->country_id = $objsoc->country_id; }
 
             // Country
-            $this->tpl['select_country'] = $form->select_country($this->object->country_id, 'country_id');
+            $this->tpl['select_country'] = $form->select_country($this->object->country_id, 'COUNTRYID');
             $countrynotdefined = $langs->trans("ErrorSetACountryFirst").' ('.$langs->trans("SeeAbove").')';
 
-            if ($user->admin) $this->tpl['info_admin'] = info_admin($langs->trans("YouCanChangeValuesForThisListFromDictionarySetup"), 1);
+            if ($user->admin) { $this->tpl['info_admin'] = info_admin($langs->trans("YouCanChangeValuesForThisListFromDictionarySetup"), 1); }
 
             // State
-            if ($this->object->country_id) $this->tpl['select_state'] = $formcompany->select_state($this->object->state_id, $this->object->country_code);
-            else $this->tpl['select_state'] = $countrynotdefined;
+            if ($this->object->country_id) { $this->tpl['select_state'] = $formcompany->select_state($this->object->state_id, $this->object->country_code); }
+            else { $this->tpl['select_state'] = $countrynotdefined; }
 
             // Physical or Moral
             $selectarray=array('0'=>$langs->trans("Physical"),'1'=>$langs->trans("Moral"));
@@ -174,10 +177,10 @@ abstract class ActionsAdherentCardCommon
         	if ($this->object->user_id)
 			{
 				$dolibarr_user=new User($this->db);
-				$result=$dolibarr_user->fetch($this->object->user_id);
+				//$result=$dolibarr_user->fetch($this->object->user_id);
 				$this->tpl['dolibarr_user'] = $dolibarr_user->getLoginUrl(1);
 			}
-			else $this->tpl['dolibarr_user'] = $langs->trans("NoDolibarrAccess");
+			else { $this->tpl['dolibarr_user'] = $langs->trans("NoDolibarrAccess"); }
         }
 
         if ($action == 'view' || $action == 'delete')
@@ -189,16 +192,16 @@ abstract class ActionsAdherentCardCommon
         		$objsoc = new Societe($this->db);
 
         		$objsoc->fetch($this->object->socid);
-        		$this->tpl['company'] = $objsoc->getNomUrl(1);
+        		$this->tpl['COMPANY'] = $objsoc->getNomUrl(1);
         	}
         	else
         	{
-        		$this->tpl['company'] = $langs->trans("AdherentNotLinkedToThirdParty");
+        		$this->tpl['COMPANY'] = $langs->trans("AdherentNotLinkedToThirdParty");
         	}
 
         	$this->tpl['civility'] = $this->object->getCivilityLabel();
 
-            $this->tpl['address'] = dol_nl2br($this->object->address);
+            $this->tpl['ADDRESS'] = dol_nl2br($this->object->address);
 
             $this->tpl['zip'] = ($this->object->zip?$this->object->zip.'&nbsp;':'');
 
@@ -251,11 +254,11 @@ abstract class ActionsAdherentCardCommon
         $this->object->lastname			= $_POST["lastname"];
         $this->object->firstname		= $_POST["firstname"];
         $this->object->civility_id		= $_POST["civility_id"];
-        $this->object->address			= $_POST["address"];
-        $this->object->zip				= $_POST["zipcode"];
+        $this->object->address			= $_POST["ADDRESS"];
+        $this->object->zip				= $_POST["ZIPCODE"];
         $this->object->town				= $_POST["town"];
-        $this->object->country_id		= $_POST["country_id"]?$_POST["country_id"]:$mysoc->country_id;
-        $this->object->state_id        	= $_POST["state_id"];
+        $this->object->country_id		= $_POST["COUNTRYID"]?$_POST["COUNTRYID"]:$mysoc->country_id;
+        $this->object->state_id        	= $_POST["STATEID"];
         $this->object->phone_perso		= $_POST["phone_perso"];
         $this->object->phone_mobile		= $_POST["phone_mobile"];
         $this->object->email			= $_POST["email"];
