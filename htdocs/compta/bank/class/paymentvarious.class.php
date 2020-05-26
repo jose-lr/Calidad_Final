@@ -600,6 +600,7 @@ class PaymentVarious extends CommonObject
 		}
 
 		$linkclose='';
+	    	$morecss='';
 		if (empty($notooltip))
 		{
 			if (! empty($conf->global->MAIN_OPTIMIZEFORTEXTBROWSER))
