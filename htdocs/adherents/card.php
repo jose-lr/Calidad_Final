@@ -46,9 +46,10 @@ const OTHER='other';
 // Load translation files required by the page
 $langs->loadLangs(array("companies", "bills", "MEMBERS", "users", "OTHER", "paypal"));
 const CONST_ALPHA='alpha';
+const BACK_TO_PAGE='backtopage';
 $action = GETPOST('action', 'CONST_ALPHA');
 $cancel = GETPOST('cancel', 'CONST_ALPHA');
-$backtopage = GETPOST('backtopage', 'CONST_ALPHA');
+$backtopage = GETPOST('BACK_TO_PAGE', 'CONST_ALPHA');
 $confirm = GETPOST('confirm', 'CONST_ALPHA');
 $rowid = GETPOST('rowid', 'int');
 $id = GETPOST('id') ?GETPOST('id', 'int') : $rowid;
@@ -1558,7 +1559,7 @@ else
 			// Create an array
 			$formquestion = array();
 			if ($object->email) $formquestion[] = array('type' => 'checkbox', 'name' => 'send_mail', 'label' => $label, 'value' => (!empty($conf->global->ADHERENT_DEFAULT_SENDINFOBYMAIL) ? 'true' : 'false'));
-			if ($backtopage)    $formquestion[] = array('type' => 'hidden', 'name' => 'backtopage', 'value' => ($backtopage != '1' ? $backtopage : $_SERVER["HTTP_REFERER"]));
+			if ($backtopage)    $formquestion[] = array('type' => 'hidden', 'name' => 'BACK_TO_PAGE', 'value' => ($backtopage != '1' ? $backtopage : $_SERVER["HTTP_REFERER"]));
 			print $form->formconfirm("card.php?rowid=".$id, $langs->trans("ResiliateMember"), $langs->trans("ConfirmResiliateMember"), "confirm_resign", $formquestion, 'no', 1, 240);
 		}
 
@@ -1566,7 +1567,7 @@ else
 		if ($action == 'delete')
 		{
 			$formquestion = array();
-			if ($backtopage) $formquestion[] = array('type' => 'hidden', 'name' => 'backtopage', 'value' => ($backtopage != '1' ? $backtopage : $_SERVER["HTTP_REFERER"]));
+			if ($backtopage) $formquestion[] = array('type' => 'hidden', 'name' => 'BACK_TO_PAGE', 'value' => ($backtopage != '1' ? $backtopage : $_SERVER["HTTP_REFERER"]));
 			print $form->formconfirm("card.php?rowid=".$id, $langs->trans("DeleteMember"), $langs->trans("ConfirmDeleteMember"), "confirm_delete", $formquestion, 'no', 1);
 		}
 
