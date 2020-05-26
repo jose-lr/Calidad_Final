@@ -36,34 +36,36 @@ $langs->loadLangs(array("admin", "members"));
 $action = GETPOST('action', 'alpha');
 
 if (!$user->admin) { accessforbidden(); }
-
-
+const CHAIN='chaine';
+const MEMBER_ENABLE='MEMBER_ENABLE_PUBLIC';
 /*
  * Actions
  */
 
 if ($action == 'setMEMBER_ENABLE_PUBLIC')
 {
-	if (GETPOST('value')) { dolibarr_set_const($db, 'MEMBER_ENABLE_PUBLIC', 1, 'chaine', 0, '', $conf->entity); 
-       }else { dolibarr_set_const($db, 'MEMBER_ENABLE_PUBLIC', 0, 'chaine', 0, '', $conf->entity); }
+	if (GETPOST('value')) { dolibarr_set_const($db, 'MEMBER_ENABLE', 1, 'CHAIN', 0, '', $conf->entity); 
+       }else { dolibarr_set_const($db, 'MEMBER_ENABLE', 0, 'CHAIN', 0, '', $conf->entity); }
 }
-
+const MEMBER_NEWFORM='MEMBER_NEWFORM_EDITAMOUNT';
+const MEMBER_NEWFORM_PAYONLINE='MEMBER_NEWFORMPAYONLINE';
+const MEMBER_FORCETYPE='MEMBER_NEWFORM_FORCETYPE';
 if ($action == 'update')
 {
-	$public = GETPOST('MEMBER_ENABLE_PUBLIC');
+	$public = GETPOST('MEMBER_ENABLE');
 	$amount = GETPOST('MEMBER_NEWFORM_AMOUNT');
-	$editamount = GETPOST('MEMBER_NEWFORM_EDITAMOUNT');
+	$editamount = GETPOST('MEMBER_NEWFORM');
 	$payonline = GETPOST('MEMBER_NEWFORM_PAYONLINE');
-	$forcetype = GETPOST('MEMBER_NEWFORM_FORCETYPE');
+	$forcetype = GETPOST('MEMBER_FORCETYPE');
 
-    $res = dolibarr_set_const($db, "MEMBER_ENABLE_PUBLIC", $public, 'chaine', 0, '', $conf->entity);
-    $res = dolibarr_set_const($db, "MEMBER_NEWFORM_AMOUNT", $amount, 'chaine', 0, '', $conf->entity);
-    $res = dolibarr_set_const($db, "MEMBER_NEWFORM_EDITAMOUNT", $editamount, 'chaine', 0, '', $conf->entity);
-    $res = dolibarr_set_const($db, "MEMBER_NEWFORM_PAYONLINE", $payonline, 'chaine', 0, '', $conf->entity);
-    if ($forcetype < 0) $res = dolibarr_del_const($db, "MEMBER_NEWFORM_FORCETYPE", $conf->entity);
-    else                $res = dolibarr_set_const($db, "MEMBER_NEWFORM_FORCETYPE", $forcetype, 'chaine', 0, '', $conf->entity);
+    $res = dolibarr_set_const($db, "MEMBER_ENABLE", $public, 'CHAIN', 0, '', $conf->entity);
+    $res = dolibarr_set_const($db, "MEMBER_NEWFORM_AMOUNT", $amount, 'CHAIN', 0, '', $conf->entity);
+    $res = dolibarr_set_const($db, "MEMBER_NEWFORM", $editamount, 'CHAIN', 0, '', $conf->entity);
+    $res = dolibarr_set_const($db, "MEMBER_NEWFORM_PAYONLINE", $payonline, 'CHAIN', 0, '', $conf->entity);
+    if ($forcetype < 0){ $res = dolibarr_del_const($db, "MEMBER_FORCETYPE", $conf->entity);}
+    else            {    $res = dolibarr_set_const($db, "MEMBER_FORCETYPE", $forcetype, 'CHAIN', 0, '', $conf->entity); }
 
-    if (!$res > 0) $error++;
+    if (!$res > 0){ $error++; }
 
  	if (!$error)
     {
@@ -91,7 +93,7 @@ print load_fiche_titre($langs->trans("MembersSetup"), $linkback, 'title_setup');
 
 $head = member_admin_prepare_head();
 
-
+const PHP_SELF='PHPSELF';
 
 print '<form action="'.$_SERVER["PHP_SELF"].'" method="post">';
 print '<input type="hidden" name="action" value="update">';
@@ -158,7 +160,8 @@ print '<input type="hidden" id="MEMBER_ENABLE_PUBLIC" name="MEMBER_ENABLE_PUBLIC
 
 
 print '<br>';
-
+const TD_CLASS='</td><td class="right">';
+const TD_TR_ETIQUETA_CIERRE='</td></tr>\n';
 if (!empty($conf->global->MEMBER_ENABLE_PUBLIC))
 {
 	print '<br>';
@@ -174,31 +177,31 @@ if (!empty($conf->global->MEMBER_ENABLE_PUBLIC))
 	$adht = new AdherentType($db);
 	print '<tr class="oddeven drag" id="trforcetype"><td>';
 	print $langs->trans("ForceMemberType");
-	print '</td><td class="right">';
+	print 'TD_CLASS';
 	$listofval = array();
 	$listofval += $adht->liste_array();
 	$forcetype = $conf->global->MEMBER_NEWFORM_FORCETYPE ?: -1;
-	print $form->selectarray("MEMBER_NEWFORM_FORCETYPE", $listofval, $forcetype, count($listofval)>1?1:0);
-	print "</td></tr>\n";
+	print $form->selectarray("MEMBER_FORCETYPE", $listofval, $forcetype, count($listofval)>1?1:0);
+	print "TD_TR_ETIQUETA_CIERRE";
 
 	// Amount
 	print '<tr class="oddeven" id="tramount"><td>';
 	print $langs->trans("DefaultAmount");
-	print '</td><td class="right">';
+	print 'TD_CLASS';
 	print '<input type="text" id="MEMBER_NEWFORM_AMOUNT" name="MEMBER_NEWFORM_AMOUNT" size="5" value="'.(! empty($conf->global->MEMBER_NEWFORM_AMOUNT)?$conf->global->MEMBER_NEWFORM_AMOUNT:'').'">';
-	print "</td></tr>\n";
+	print "TD_TR_ETIQUETA_CIERRE";
 
 	// Can edit
 	print '<tr class="oddeven" id="tredit"><td>';
 	print $langs->trans("CanEditAmount");
-	print '</td><td class="right">';
-	print $form->selectyesno("MEMBER_NEWFORM_EDITAMOUNT", (! empty($conf->global->MEMBER_NEWFORM_EDITAMOUNT)?$conf->global->MEMBER_NEWFORM_EDITAMOUNT:0), 1);
-	print "</td></tr>\n";
+	print 'TD_CLASS';
+	print $form->selectyesno("MEMBER_NEWFORM, (! empty($conf->global->MEMBER_NEWFORM_EDITAMOUNT)?$conf->global->MEMBER_NEWFORM_EDITAMOUNT:0), 1);
+	print "TD_TR_ETIQUETA_CIERRE";
 
 	// Jump to an online payment page
 	print '<tr class="oddeven" id="trpayment"><td>';
 	print $langs->trans("MEMBER_NEWFORM_PAYONLINE");
-	print '</td><td class="right">';
+	print 'TD_CLASS';
 	$listofval=array();
 	$listofval['-1']=$langs->trans('No');
 	$listofval['all']=$langs->trans('Yes').' ('.$langs->trans("VisitorCanChooseItsPaymentMode").')';
@@ -206,7 +209,7 @@ if (!empty($conf->global->MEMBER_ENABLE_PUBLIC))
 	if (! empty($conf->paypal->enabled)) $listofval['paypal']='PayPal';
 	if (! empty($conf->stripe->enabled)) $listofval['stripe']='Stripe';
 	print $form->selectarray("MEMBER_NEWFORM_PAYONLINE", $listofval, (! empty($conf->global->MEMBER_NEWFORM_PAYONLINE)?$conf->global->MEMBER_NEWFORM_PAYONLINE:''), 0);
-	print "</td></tr>\n";
+	print "TD_TR_ETIQUETA_CIERRE";
 
 	print '</table>';
 
