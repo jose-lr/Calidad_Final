@@ -126,7 +126,7 @@ $hookmanager->initHooks(array('membercard', 'globalcard'));
 
 $parameters = array('id'=>$id, 'ROWID'=>$id, 'objcanvas'=>$objcanvas, 'confirm'=>$confirm);
 $reshook = $hookmanager->executeHooks('doActions', $parameters, $object, $action); // Note that $action and $object may have been modified by some hooks
-if ($reshook < 0) setEventMessages($hookmanager->error, $hookmanager->errors, 'errors');
+if ($reshook < 0) { setEventMessages($hookmanager->error, $hookmanager->errors, 'errors'); }
 
 if (empty($reshook))
 {
@@ -157,7 +157,7 @@ if (empty($reshook))
 			if ($userid != $object->user_id)	// If link differs from currently in database
 			{
 				$result = $object->setUserId($userid);
-				if ($result < 0) dol_print_error($object->db, $object->error);
+				if ($result < 0){ dol_print_error($object->db, $object->error); }
 				$action = '';
 			}
 		}
