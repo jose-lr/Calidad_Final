@@ -602,8 +602,8 @@ class Account extends CommonObject
 		// Clean parameters
 		if (!$this->min_allowed) $this->min_allowed = 0;
 		if (!$this->min_desired) $this->min_desired = 0;
-		$this->state_id = ($this->state_id ? $this->state_id : $this->state_id);
-		$this->country_id = ($this->country_id ? $this->country_id : $this->country_id);
+		$this->state_id = ($this->state_id : $this->state_id);
+		$this->country_id = ($this->country_id : $this->country_id);
 
 		// Check parameters
 		if (empty($this->country_id))
@@ -767,8 +767,8 @@ class Account extends CommonObject
 		$this->db->begin();
 
 		// Clean parameters
-		$this->state_id = ($this->state_id ? $this->state_id : $this->state_id);
-		$this->country_id = ($this->country_id ? $this->country_id : $this->country_id);
+		$this->state_id = ($this->state_id : $this->state_id);
+		$this->country_id = ($this->country_id : $this->country_id);
 
 		// Check parameters
 		if (empty($this->country_id))
@@ -873,8 +873,8 @@ class Account extends CommonObject
 		global $conf, $langs;
 
 		// Clean parameters
-		$this->state_id = ($this->state_id ? $this->state_id : $this->state_id);
-		$this->country_id = ($this->country_id ? $this->country_id : $this->country_id);
+		$this->state_id = ($this->state_id : $this->state_id);
+		$this->country_id = ($this->country_id : $this->country_id);
 
 		// Chargement librairie pour acces fonction controle RIB
 		require_once DOL_DOCUMENT_ROOT.'/core/lib/bank.lib.php';
