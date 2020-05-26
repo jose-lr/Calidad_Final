@@ -323,8 +323,8 @@ if (empty($reshook))
 			
 			$object->morphy      = GETPOST("morphy", 'CONST_ALPHA');
 
-			if (GETPOST('deletephoto', 'CONST_ALPHA')) $object->photo = '';
-			elseif (!empty($_FILES['photo']['name'])) $object->photo = dol_sanitizeFileName($_FILES['photo']['name']);
+			if (GETPOST('deletephoto', 'CONST_ALPHA')) { $object->photo = ''; }
+			elseif (!empty($_FILES['photo']['name'])) { $object->photo = dol_sanitizeFileName($_FILES['photo']['name']); }
 
 			// Get status and public property
 			$object->statut      = GETPOST("statut", 'CONST_ALPHA');
@@ -332,20 +332,20 @@ if (empty($reshook))
 
 			// Fill array 'array_options' with data from add form
 			$ret = $extrafields->setOptionalsFromPost(null, $object);
-			if ($ret < 0) $error++;
+			if ($ret < 0) { $error++;}
 
 			// Check if we need to also synchronize user information
 			$nosyncuser = 0;
 			if ($object->user_id)	// If linked to a user
 			{
-				if ($user->id != $object->user_id && empty($user->rights->user->user->creer)) $nosyncuser = 1; // Disable synchronizing
+				if ($user->id != $object->user_id && empty($user->rights->user->user->creer)) { $nosyncuser = 1; } // Disable synchronizing
 			}
 
 			// Check if we need to also synchronize password information
 			$nosyncuserpass = 0;
 			if ($object->user_id)	// If linked to a user
 			{
-				if ($user->id != $object->user_id && empty($user->rights->user->user->password)) $nosyncuserpass = 1; // Disable synchronizing
+				if ($user->id != $object->user_id && empty($user->rights->user->user->password)) { $nosyncuserpass = 1; }// Disable synchronizing
 			}
 
 			$result = $object->update($user, 0, $nosyncuser, $nosyncuserpass);
@@ -430,7 +430,7 @@ if (empty($reshook))
 
 	if ($action == 'add' && $user->rights->adherent->creer)
 	{
-		if ($canvas) $object->canvas = $canvas;
+		if ($canvas) { $object->canvas = $canvas; }
 		$birthdate = '';
 		if (isset($_POST["birthday"]) && $_POST["birthday"]
 				&& isset($_POST["birthmonth"]) && $_POST["birthmonth"]
@@ -459,7 +459,7 @@ if (empty($reshook))
 		$phone = GETPOST("phone", 'CONST_ALPHA');
 		$phone_perso = GETPOST("phone_perso", 'CONST_ALPHA');
 		$phone_mobile = GETPOST("phone_mobile", 'CONST_ALPHA');
-		// $skype=GETPOST("member_skype", 'alpha');
+		
 		// $twitter=GETPOST("member_twitter", 'alpha');
 		// $facebook=GETPOST("member_facebook", 'alpha');
         // $linkedin=GETPOST("member_linkedin", 'alpha');
@@ -467,7 +467,7 @@ if (empty($reshook))
 		$login = GETPOST("member_login", 'CONST_ALPHA');
 		$pass = GETPOST("password", 'CONST_ALPHA');
 		$photo = GETPOST("photo", 'CONST_ALPHA');
-		//$comment=GETPOST("comment",'none');
+		
 		$morphy = GETPOST("morphy", 'CONST_ALPHA');
 		$subscription = GETPOST("subscription", 'CONST_ALPHA');
 		$public = GETPOST("public", 'CONST_ALPHA');
@@ -498,7 +498,7 @@ if (empty($reshook))
 			}
 		}
 
-		// $object->skype       = $skype;
+		
 		// $object->twitter     = $twitter;
 		// $object->facebook    = $facebook;
 		// $object->linkedin    = $linkedin;
@@ -509,7 +509,7 @@ if (empty($reshook))
 		$object->birth       = $birthdate;
 		$object->photo       = $photo;
 		$object->typeid      = $typeid;
-		//$object->note        = $comment;
+		
 		$object->morphy      = $morphy;
 		$object->user_id     = $userid;
 		$object->socid = $socid;
@@ -517,7 +517,7 @@ if (empty($reshook))
 
 		// Fill array 'array_options' with data from add form
 		$ret = $extrafields->setOptionalsFromPost(null, $object);
-		if ($ret < 0) $error++;
+		if ($ret < 0) { $error++; }
 
 		// Check parameters
 		if (empty($morphy) || $morphy == "-1") {
@@ -573,7 +573,7 @@ if (empty($reshook))
 			setEventMessages($langs->trans("ErrorBadEMail", $email), null, 'errors');
 		}
 		$public = 0;
-		if (isset($public)) $public = 1;
+		if (isset($public)) { $public = 1; }
 
 		if (!$error)
 		{
@@ -663,7 +663,7 @@ if (empty($reshook))
 				$arraydefaultmessage = null;
 				$labeltouse = $conf->global->ADHERENT_EMAIL_TEMPLATE_MEMBER_VALIDATION;
 
-				if (!empty($labeltouse)) $arraydefaultmessage = $formmail->getEMailTemplate($db, 'member', $user, $outputlangs, 0, 1, $labeltouse);
+				if (!empty($labeltouse)) { $arraydefaultmessage = $formmail->getEMailTemplate($db, 'member', $user, $outputlangs, 0, 1, $labeltouse); }
 
 				if (!empty($labeltouse) && is_object($arraydefaultmessage) && $arraydefaultmessage->id > 0)
 				{
@@ -742,7 +742,7 @@ if (empty($reshook))
 					$arraydefaultmessage = null;
 					$labeltouse = $conf->global->ADHERENT_EMAIL_TEMPLATE_CANCELATION;
 
-					if (!empty($labeltouse)) $arraydefaultmessage = $formmail->getEMailTemplate($db, 'member', $user, $outputlangs, 0, 1, $labeltouse);
+					if (!empty($labeltouse)) { $arraydefaultmessage = $formmail->getEMailTemplate($db, 'member', $user, $outputlangs, 0, 1, $labeltouse); }
 
 					if (!empty($labeltouse) && is_object($arraydefaultmessage) && $arraydefaultmessage->id > 0)
 					{
@@ -852,7 +852,7 @@ if (is_object($objcanvas) && $objcanvas->displayCanvasExists($action))
 	{
 		$object = new Adherent($db);
 		$result = $object->fetch($id);
-		if ($result <= 0) dol_print_error('', $object->error);
+		if ($result <= 0) { dol_print_error('', $object->error); }
 	}
    	$objcanvas->assign_values($action, $object->id, $object->ref); // Set value for templates
     $objcanvas->display_canvas($action); // Show template
