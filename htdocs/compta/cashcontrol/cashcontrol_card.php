@@ -221,7 +221,7 @@ if ($action == "create" || $action == "start")
 	$theoricalamountforterminal = array();
 	$theoricalnbofinvoiceforterminal = array();
 
-	if (GETPOST('posnumber', 'alpha') != '' && GETPOST('posnumber', 'alpha') != '' && GETPOST('posnumber', 'alpha') != '-1')
+	if (GETPOST('posnumber', 'alpha') != '' && GETPOST('posnumber', 'alpha') != '-1')
 	{
 		$posmodule = GETPOST('posmodule', 'alpha');
 		$terminalid = GETPOST('posnumber', 'alpha');
