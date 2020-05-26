@@ -191,7 +191,7 @@ if (empty($reshook))
 				if (!$error)
 				{
 					$result = $object->setThirdPartyId($socid);
-					if ($result < 0) dol_print_error($object->db, $object->error);
+					if ($result < 0) { dol_print_error($object->db, $object->error); }
 					$action = '';
 				}
 			}
@@ -313,14 +313,14 @@ if (empty($reshook))
 					$object->socialnetworks[$key] = trim(GETPOST($key, 'alphanohtml'));
 				}
 			}
-			//$object->skype       = trim(GETPOST("skype", 'alpha'));
+			
 			//$object->twitter     = trim(GETPOST("twitter", 'alpha'));
 			//$object->facebook    = trim(GETPOST("facebook", 'alpha'));
 			//$object->linkedin    = trim(GETPOST("linkedin", 'alpha'));
 			$object->birth       = $birthdate;
 
 			$object->typeid      = GETPOST("typeid", 'int');
-			//$object->note        = trim(GETPOST("comment","alpha"));
+			
 			$object->morphy      = GETPOST("morphy", 'CONST_ALPHA');
 
 			if (GETPOST('deletephoto', 'CONST_ALPHA')) $object->photo = '';
