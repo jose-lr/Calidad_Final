@@ -884,7 +884,7 @@ else
 
         if (!empty($socid)) {
             $object = new Societe($db);
-            if ($socid > 0) $object->fetch($socid);
+            if ($socid > 0) { $object->fetch($socid); }
 
             if (!($object->id > 0))
             {
@@ -933,7 +933,7 @@ else
 		print '<input type="hidden" name="token" value="'.newToken().'">';
 		print '<input type="hidden" name="action" value="add">';
 		print '<input type="hidden" name="socid" value="'.$socid.'">';
-		if ($backtopage) print '<input type="hidden" name="backtopage" value="'.($backtopage != '1' ? $backtopage : $_SERVER["HTTP_REFERER"]).'">';
+		if ($backtopage) { print '<input type="hidden" name="backtopage" value="'.($backtopage != '1' ? $backtopage : $_SERVER["HTTP_REFERER"]).'">'; }
 
         dol_fiche_head('');
 
@@ -1016,7 +1016,7 @@ else
 		$object->country_id = $object->country_id ? $object->country_id : $mysoc->country_id;
 		print '<tr><td width="25%">'.$langs->trans('Country').'</td><td>';
 		print $form->select_country(GETPOST('country_id', 'CONST_ALPHA') ?GETPOST('country_id', 'CONST_ALPHA') : $object->country_id, 'country_id');
-		if ($user->admin) print info_admin($langs->trans("YouCanChangeValuesForThisListFromDictionarySetup"), 1);
+		if ($user->admin) { print info_admin($langs->trans("YouCanChangeValuesForThisListFromDictionarySetup"), 1); }
 		print '</td></tr>';
 
 		// State
@@ -1045,8 +1045,8 @@ else
 
 	    if (!empty($conf->socialnetworks->enabled)) {
 			foreach ($socialnetworks as $key => $value) {
-                if (!$value['active']) break;
-				print '<tr><td>'.$langs->trans($value['label']).'</td><td><input type="text" name="member_'.$key.'" size="40" value="'.(GETPOST('member_'.$key, 'CONST_ALPHA') ?GETPOST('member_'.$key, 'CONST_ALPHA') : $object->socialnetworks[$key]).'"></td></tr>';
+                if (!$value['active']){ break;
+				print '<tr><td>'.$langs->trans($value['label']).'</td><td><input type="text" name="member_'.$key.'" size="40" value="'.(GETPOST('member_'.$key, 'CONST_ALPHA') ?GETPOST('member_'.$key, 'CONST_ALPHA') : $object->socialnetworks[$key]).'"></td></tr>'; }
 			}
 		}
 
