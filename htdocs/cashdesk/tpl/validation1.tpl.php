@@ -33,6 +33,8 @@ $langs->loadLangs(array("main", "bills", "banks"));
 <fieldset class="cadre_facturation"><legend class="titre1"><?php echo $langs->trans("Summary"); ?></legend>
 
 	<table class="table_resume">
+		<caption>Resume</caption>
+		<th scope="col">Name</th> 
 
 		<tr><td class="resume_label"><?php echo $langs->trans("Invoice"); ?></td><td><?php  echo $obj_facturation->numInvoice(); ?></td></tr>
 		<tr><td class="resume_label"><?php echo $langs->trans("TotalHT"); ?></td><td><?php echo price(price2num($obj_facturation->prixTotalHt(), 'MT'), 0, $langs, 0, 0, -1, $conf->currency); ?></td></tr>
